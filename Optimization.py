@@ -7,6 +7,8 @@ class Optimization:
     def __init__(self, population_size: int, dimension: int):
         self.population_size = population_size
         self.dimension = dimension
+        self.mutate_rate = mutate_rate
+        self.crossover_rate = crossover_rate
     def mutate(self, chromosome: list[float]):
         if random.uniform(0,1) > self.mutate_rate:
             return chromosome

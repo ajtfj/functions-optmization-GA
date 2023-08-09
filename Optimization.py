@@ -52,8 +52,16 @@ class Optimization:
                     break
         return list(map(lambda tup: tup[0], selected))
 
-    def survivors_select(self):
-        raise Exception("Not implemented")
+    def survivors_select(self, children: list[list[float]]):
+        for child in children:
+            self.population.append(child)
+        rank = self.rank()
+        worts = []
+        for i in range(len(children)):
+            worts.append(rank[len(self.population)-1-i][2])
+            worts.sort(reverse=True)
+        for w in worts:
+            self.population.pop(w)
         
     def generate_population(self, min_gene: float, max_gene: float):
         for _ in range(self.population_size):

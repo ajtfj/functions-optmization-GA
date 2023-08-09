@@ -7,4 +7,4 @@ class SchwefelOptimization(Optimization):
 
     def fitness(self, chromosome: list[float]):
         result = schwefel(chromosome)
-        return math.exp(-result)
+        return result

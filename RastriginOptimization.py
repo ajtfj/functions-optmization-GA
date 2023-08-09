@@ -7,4 +7,4 @@ class RastriginOptimization(Optimization):
 
     def fitness(self, chromosome: list[float]):
         result = rastrigin(chromosome)
-        return math.exp(-result)
+        return result

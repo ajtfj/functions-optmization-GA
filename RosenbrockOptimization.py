@@ -8,4 +8,4 @@ class RosenbrockOptimization(Optimization):
 
     def fitness(self, chromosome: list[float]):
         result = rosenbrock(chromosome)
-        return math.exp(-result)
+        return result

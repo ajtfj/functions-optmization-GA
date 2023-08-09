@@ -7,4 +7,4 @@ class AckleyOptimization(Optimization):
 
     def fitness(self, chromosome: list[float]):
         result = ackley(chromosome)
-        return math.exp(-result)
+        return result

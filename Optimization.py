@@ -77,6 +77,7 @@ class Optimization:
             self.population.append(chromossome)
 
     def fitness(self):
+        raise Exception("Not implemented")
     
     def rank(self):
         sample = self.population[:]

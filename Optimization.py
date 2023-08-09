@@ -68,6 +68,7 @@ class Optimization:
             self.population.pop(w)
         
     def generate_population(self, min_gene: float, max_gene: float):
+        self.population = []
         for _ in range(self.population_size):
             chromossome = []
             for _ in range(self.dimension):

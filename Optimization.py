@@ -85,6 +85,7 @@ class Optimization:
         rank = [list(s) for s in zip(sample, fitness, range(len(sample)))]
         rank.sort(key=lambda item: item[1], reverse=False)
 
+        return rank
     
     def solution(self):
         rank = self.rank()

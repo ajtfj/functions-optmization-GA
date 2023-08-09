@@ -6,9 +6,18 @@ class Optimization:
     def __init__(self, population_size: int, dimension: int):
         self.population_size = population_size
         self.dimension = dimension
+    def mutate(self, chromosome: list[float]):
+        if random.uniform(0,1) > self.mutate_rate:
+            return chromosome
+        
+        start = random.randint(0, len(chromosome) - 2)
+        end = random.randint(start + 1, len(chromosome) - 1)
+        segment = chromosome[start:end]
+        random.shuffle(segment)
+        chromosome[start:end] = segment
 
-    def mutate(self):
-        raise Exception("Not implemented")
+        return chromosome
+
 
     def crossover(self):
         raise Exception("Not implemented")

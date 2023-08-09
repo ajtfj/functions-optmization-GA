@@ -4,22 +4,33 @@ class Optimization:
     population = []
     EPSILON = 1e-6
 
-    def __init__(self, population_size: int, dimension: int, mutate_rate: float, crossover_rate: float):
+    def __init__(
+        self, 
+        population_size: int, 
+        dimension: int,
+        mutate_rate: float,
+        crossover_rate: float,
+        gene_mutation_rate: float
+    ):
         self.population_size = population_size
         self.dimension = dimension
         self.mutate_rate = mutate_rate
         self.crossover_rate = crossover_rate
+        self.gene_mutation_rate = gene_mutation_rate
 
     def mutate(self, chromosome: list[float]):
-        if random.uniform(0,1) > self.mutate_rate:
+        if random.random() > self.mutate_rate:
             return chromosome
-        
-        start = random.randint(0, len(chromosome) - 2)
-        end = random.randint(start + 1, len(chromosome) - 1)
-        segment = chromosome[start:end]
-        random.shuffle(segment)
-        chromosome[start:end] = segment
 
+        for i in range(len(chromosome)):
+            if random.random() > self.gene_mutation_rate:
+                continue
+            chromosome[i] += random.gauss(0, 1)
+            if chromosome[i] < self.gene_lower_bound:
+                chromosome[i] = self.gene_lower_bound
+            elif chromosome[i] > self.gene_upper_bound:
+                chromosome[i] = self.gene_upper_bound
+        
         return chromosome
 
     def crossover(self, parent_1: list[float], parent_2: list[float]):
@@ -56,12 +67,11 @@ class Optimization:
                     break
         return list(map(lambda tup: tup[0], selected))
 
-    def survivors_select(self, children: list[list[float]]):
-        for child in children:
-            self.population.append(child)
+    def survivors_select(self, offspring: list[list[float]]):
+        self.population.extend(offspring)
         rank = self.rank()
         worts = []
-        for i in range(len(children)):
+        for i in range(len(offspring)):
             worts.append(rank[len(self.population)-1-i][2])
             worts.sort(reverse=True)
         for w in worts:

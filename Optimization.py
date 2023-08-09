@@ -72,4 +72,12 @@ class Optimization:
             self.population.append(chromossome)
 
     def fitness(self):
-        raise Exception("Not implemented")
+    
+    def rank(self):
+        sample = self.population[:]
+
+        fitness = [self.fitness(chromosome) for chromosome in sample]
+        rank = [list(s) for s in zip(sample, fitness, range(len(sample)))]
+        rank.sort(key=lambda item: item[1], reverse=False)
+
+        return rank

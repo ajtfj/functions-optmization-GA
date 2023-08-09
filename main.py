@@ -1,7 +1,7 @@
 from Optimization import Optimization
 import numpy as np
 
-def find_solution(optimization: Optimization):
+def find_solution(optimization: Optimization, evaluations=10000):
     optimization.generate_population()
     population_fitness = optimization.rank()
     solution = optimization.solution()
@@ -9,7 +9,7 @@ def find_solution(optimization: Optimization):
     average_fitness_history = [np.mean(list(map(lambda x: x[1], population_fitness)))]
 
     evaluation = 0
-    while solution == None and evaluation < 10000:
+    while solution == None and evaluation < evaluations:
         parents = optimization.parents_select(population_fitness)
         children = []
         children.extend(optimization.crossover(parents[0], parents[1]))

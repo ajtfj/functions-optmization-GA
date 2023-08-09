@@ -38,8 +38,19 @@ class Optimization:
 
         return [offspring_1, offspring_2]
         
-    def parents_select(self):
-        raise Exception("Not implemented")
+    def parents_select(self, rank: list[tuple[list[float], float, int]]):
+        total_fitness = sum([individual[1] for individual in rank])
+        probabilities = [individual[1] / total_fitness for individual in rank]
+        selected = []
+        for _ in range(2):
+            pick = random.uniform(0, 1)
+            current = 0
+            for i, individual in enumerate(rank):
+                current += probabilities[i]
+                if pick < current:
+                    selected.append(individual)
+                    break
+        return list(map(lambda tup: tup[0], selected))
 
     def survivors_select(self):
         raise Exception("Not implemented")

@@ -2,6 +2,7 @@ import random
 
 class Optimization:
     population = []
+    EPSILON = 1e-6
 
     def __init__(self, population_size: int, dimension: int):
         self.population_size = population_size
@@ -80,4 +81,8 @@ class Optimization:
         rank = [list(s) for s in zip(sample, fitness, range(len(sample)))]
         rank.sort(key=lambda item: item[1], reverse=False)
 
-        return rank
+    
+    def solution(self):
+        rank = self.rank()
+        if rank[0][1] <= self.EPSILON:
+            return rank[0]

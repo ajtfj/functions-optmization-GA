@@ -1,7 +1,7 @@
 from Optimization import Optimization
 import numpy as np
 
-def find_solution(optimization: Optimization, evaluations=10000):
+def find_solution(optimization: Optimization, evaluations=100000):
     optimization.generate_population()
     population_fitness = optimization.rank()
     solution = optimization.solution()
